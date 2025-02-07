@@ -211,4 +211,7 @@
  ![image](https://github.com/user-attachments/assets/9c6cf796-a858-4688-917b-6fac870d593d)
 
 
+## **Here is the output i got for the input : ABHI####**
+
+![image](https://github.com/user-attachments/assets/f42c9bec-30b9-4f5d-8855-1e91d5623f58)
 
