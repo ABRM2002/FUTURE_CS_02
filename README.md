@@ -25,28 +25,29 @@
 
 - Start by creating a simple window with tkinter where users can input a password and click a button to analyze it.
 
-- On your VS Code :-
-
-- CODE :-
+- On your VS Code type :-
   
-import tkinter as tk
+       import tkinter as tk
 
-# Create the main window
-root = tk.Tk()
-root.title("Password Strength Analyzer")
+## Create the main window :-
 
-# Create entry for password input
-label = tk.Label(root, text="Enter Password:")
-label.pack()
+     root = tk.Tk()
+     root.title("Password Strength Analyzer")
+---
 
-password_entry = tk.Entry(root, show="*")
-password_entry.pack()
+## Create entry for password input :-
 
-# Create a button to analyze password
-analyze_button = tk.Button(root, text="Analyze Password")
-analyze_button.pack()
+     label = tk.Label(root, text="Enter Password:")
+     label.pack()
+     password_entry = tk.Entry(root, show="*")
+     password_entry.pack()
 
-root.mainloop()
+---
+
+## Create a button to analyze password :-
+     analyze_button = tk.Button(root, text="Analyze Password")
+     analyze_button.pack()
+     root.mainloop()
 
 ---
 
@@ -54,24 +55,20 @@ root.mainloop()
 
 - Implement the logic to check for password strength using conditions like length, uppercase letters, lowercase letters, numbers, and special characters.
 
-import re
+         import re
 
-- CODE :-
-def analyze_password(password):
-    strength = 0
-    criteria = {
-        "length": len(password) >= 8,
-        "uppercase": re.search(r"[A-Z]", password),
-        "lowercase": re.search(r"[a-z]", password),
-        "digit": re.search(r"\d", password),
-        "special_char": re.search(r"[\W_]", password)
-    }
-
-   for condition, met in criteria.items():
-        if met:
-            strength += 1
-
-   return strength, criteria
+         def analyze_password(password):
+         strength = 0
+         criteria = {
+         "length": len(password) >= 8,
+         "uppercase": re.search(r"[A-Z]", password),
+         "lowercase": re.search(r"[a-z]", password),
+         "digit": re.search(r"\d", password),
+         "special_char": re.search(r"[\W_]", password) }
+          for condition, met in criteria.items():
+          if met:
+          strength += 1
+          return strength, criteria
 
 ---
 
@@ -79,24 +76,21 @@ def analyze_password(password):
 
 - Update the tkinter GUI to display the password strength to the user when they click the "Analyze Password" button.
 
--CODE :-
-  def analyze_and_display():
-    password = password_entry.get()
-    strength, criteria = analyze_password(password)
-    
-   result = f"Password Strength: {strength}/5\n"
-    for criterion, met in criteria.items():
-        result += f"{criterion}: {'Passed' if met else 'Failed'}\n"
-    
-   result_label.config(text=result)
+       def analyze_and_display():
+       password = password_entry.get()
+       strength, criteria = analyze_password(password)
+       result = f"Password Strength: {strength}/5\n"
+       for criterion, met in criteria.items():
+       result += f"{criterion}: {'Passed' if met else 'Failed'}\n"
+       result_label.config(text=result)
 
-# Update button functionality
-analyze_button.config(command=analyze_and_display)
+## Update button functionality :-
+       analyze_button.config(command=analyze_and_display)
 
-# Create a label to display the results
-result_label = tk.Label(root, text="")
-result_label.pack()
-root.mainloop()
+## Create a label to display the results :-
+    result_label = tk.Label(root, text="")
+    result_label.pack()
+    root.mainloop()
 
 ---
 
@@ -104,27 +98,56 @@ root.mainloop()
 
 - To enhance security, you can include password hashing using the hashlib library. This will hash the password and display the hash to the user.
 
--CODE :-
-   import hashlib
 
-def hash_password(password):
-    return hashlib.sha256(password.encode()).hexdigest()
+       import hashlib
 
-def analyze_and_display():
-    password = password_entry.get()
-    strength, criteria = analyze_password(password)
-    hashed_password = hash_password(password)
+      def hash_password(password):
+       return hashlib.sha256(password.encode()).hexdigest()
+
+       def analyze_and_display():
+       password = password_entry.get()
+       strength, criteria = analyze_password(password)
+       hashed_password = hash_password(password)
     
-   result = f"Password Strength: {strength}/5\n"
-    for criterion, met in criteria.items():
+       result = f"Password Strength: {strength}/5\n"
+       for criterion, met in criteria.items():
         result += f"{criterion}: {'Passed' if met else 'Failed'}\n"
     
-   result += f"\nHashed Password: {hashed_password}"
+      result += f"\nHashed Password: {hashed_password}"
     
-   result_label.config(text=result)
+      result_label.config(text=result)
 
    ---
 
+## Step 7: Add Hashing with hashlib for Encryption :-
+
+  - To enhance security, you can hash the password using the hashlib library.
+
+         import hashlib
+
+## Function to hash the password :-
+    def hash_password(password):
+    return hashlib.sha256(password.encode()).hexdigest()
+
+## Update the analyze_and_display function to include password hashing :-
+    
+    def analyze_and_display():
+    password = password_entry.get()  # Get password input
+    strength, criteria = analyze_password(password)  # Analyze password
+    hashed_password = hash_password(password)  # Hash the password
+
+    result_text = f"Password Strength: {strength}/5\n"
+    for criterion, met in criteria.items():
+        result_text += f"{criterion}: {'Passed' if met else 'Failed'}\n"
+    
+    result_text += f"\nHashed Password (SHA-256): {hashed_password}"
+    result_label.config(text=result_text)  # Update result label
+
+- We create a hash_password function that hashes the password using the SHA-256 algorithm.
+
+- The hashed password is displayed alongside the strength analysis results.
+
+  
 
 
 
