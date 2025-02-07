@@ -1,7 +1,7 @@
 ## FUTURE_CS_02
 
-### HELLO 😀
-### Here is the walkthrough documentation of how I completed Task 2 of the Cyber Security Internship at Future Interns :-
+## HELLO 😀
+## Here is the walkthrough documentation of how I completed Task 2 of the Cyber Security Internship at Future Interns :-
 
 ---
 
@@ -92,7 +92,7 @@
 ---
 
 
-# Display password strength :-
+## Display password strength :-
     result = f"Password Strength: {strength}/5\n"
     for criterion, met in criteria.items():
         result += f"{criterion}: {'Passed' if met else 'Failed'}\n"
@@ -105,19 +105,19 @@
 
 ---
 
-# Create a button that triggers password analysis :-
+## Create a button that triggers password analysis :-
      analyze_button = tk.Button(root, text="Analyze Password", command=analyze_and_display)
      analyze_button.pack(pady=10)
 
 ---
 
-# Create a label to display the results
+## Create a label to display the results
     result_label = tk.Label(root, text="")
     result_label.pack(pady=10)
 
 ---
 
-# Start the GUI main loop
+## Start the GUI main loop
     root.mainloop()
 
 ---
