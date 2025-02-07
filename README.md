@@ -147,7 +147,9 @@
 
 - The hashed password is displayed alongside the strength analysis results.
 
+## **Here is the output i got for the input : ABHIabi123##**
   
+![Screenshot 2025-02-07 101430](https://github.com/user-attachments/assets/8a6b0ed7-1e92-40e2-80ff-558348d66cb7)
 
 
 
