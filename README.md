@@ -27,9 +27,9 @@
 
 - On your VS Code type :-
   
-       import tkinter as tk
-       import re
-       import hashlib
+      import tkinter as tk
+      import re
+      import hashlib
 
 ## Create the main window :-
 
@@ -41,10 +41,7 @@
 ## Create a label to prompt for password input :-
 
      label = tk.Label(root, text="Enter Password:")
-     label.pack()
-     password_entry = tk.Entry(root, show="*", width=30)
-     password_entry.pack(pady=10)
-
+     label.pack(pady=10)
 
 ---
 
@@ -128,6 +125,81 @@
 - We create a hash_password function that hashes the password using the SHA-256 algorithm.
 
 - The hashed password is displayed alongside the strength analysis results.
+
+
+## Overall code :-
+
+    import tkinter as tk
+    import re
+    import hashlib
+
+    root = tk.Tk()
+    root.title("Password Strength Analyzer")
+    root.geometry("400x300") 
+
+
+    label = tk.Label(root, text="Enter Password:")
+    label.pack(pady = 10)
+
+
+
+    password_entry = tk.Entry(root, show="*", width=30)
+    password_entry.pack(pady=10)
+
+
+
+    def analyze_password(password):
+        strength = 0
+        criteria = {
+            "Length >= 8 characters": len(password) >= 8,
+            "Contains uppercase letter": re.search(r"[A-Z]", password),
+            "Contains lowercase letter": re.search(r"[a-z]", password),
+            "Contains digit": re.search(r"\d", password),
+            "Contains special character": re.search(r"[\W_]", password)
+        }
+
+        for condition, met in criteria.items():
+           if met:
+               strength += 1
+
+        return strength, criteria
+
+
+
+    def hash_password(password):
+        return hashlib.sha256(password.encode()).hexdigest()
+
+  
+    def analyze_and_display():
+        password = password_entry.get()  # Get the entered password
+        strength, criteria = analyze_password(password)  # Analyze password strength
+        hashed_password = hash_password(password)  # Hash the password
+     
+   
+        result = f"\nPassword Strength: {strength}/5\n"
+        for criterion, met in criteria.items():
+            result += f"{criterion}: {'Passed' if met else 'Failed'}\n"
+
+
+        result += f"\nHashed Password (SHA-256): {hashed_password}"
+
+
+        result_label.config(text=result)
+
+
+
+    analyze_button = tk.Button(root, text="Analyze Password", command=analyze_and_display)
+    analyze_button.pack(pady=10)
+
+
+
+    result_label = tk.Label(root, text="")
+    result_label.pack(pady=10)
+
+
+    root.mainloop()
+
+---
 
 ## **Here is the output i got for the input : ABHIabi123##**
   
